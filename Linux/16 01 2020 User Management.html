@@ -1,0 +1,577 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>16.01.2020 User Management</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f67e2aa1-7a7b-475e-80c5-ab07987ea71e" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2F9t_gJWC32zk%2Fmaxresdefault.jpg&amp;f=1&amp;nofb=1"/></div><h1 class="page-title">16.01.2020 User Management</h1></header><div class="page-body"><p id="1039c3fd-60e8-44f9-bc9e-d9567f67b3ae" class="">UID 1000</p><p id="9633ad04-39b0-4df2-826c-7eb0587f9c85" class=""><mark class="highlight-red">Groups </mark>: <mark class="highlight-red">Users </mark>&gt; because user get <em>specified </em>there by default in OPENSUSE</p><p id="23733eb8-b36a-4b57-9a9d-29b314740667" class="">in UBUNTU it <em>specifies </em>new users in groups called by their name </p><hr id="d53da18d-511a-4621-bef6-3b1af3ffe0e1"/><p id="a72dff5e-d9f7-4743-a8db-09c90f4820b3" class="">In the &quot; Default for users&quot; menu we can rename (Skeleton) file</p><hr id="69aaffba-adea-427b-b2cc-da34a4948894"/><p id="730b98ba-9b4e-4d67-b4d3-8039fd6bf431" class=""><mark class="highlight-red">Umask </mark>meaning 022 : Admin Rights</p><hr id="59d06217-0b0c-42e4-90b3-63797f5800bd"/><p id="cf664c93-b442-44aa-9cc2-e1930314afae" class=""><code>cat etc/passwd </code>To view users </p><hr id="6b0b149e-1d62-43ce-9987-f8149e0bfa28"/><p id="63bfe72a-0b35-4024-9c90-fb0cf4855f14" class=""><mark class="highlight-red">useradd  </mark><code>-m </code>&lt;Nameofuser&gt;</p><p id="d5895cb5-5322-4644-8278-86212a65133f" class=""><code>-c </code> : Comment in the GECOS field</p><p id="5f5a6068-0ec9-4d09-b007-9cd693c2e8b4" class=""><code>-d </code> : otherwise <em>/home/newuser </em>is chosen instead of the <em>Root Directory </em></p><p id="3b2189ee-1506-4553-8b57-0983a1853cca" class=""><code>-D </code>: Print information / home directory of the new account</p><p id="c1e8136d-ea86-4ee4-bcc3-c00bd1f0bf36" class=""><code>-g</code> : assign Group to user or GID</p><p id="d5595d44-30c2-4126-ba25-f6045ea57a5a" class=""><code>-G </code> : more groups to assign to user </p><p id="5c855efa-3d8e-4442-a72d-6419b81699ec" class=""><code>-u </code>: assign UID </p><p id="8cbcc0ea-0a65-4090-b829-4ed7c4f14cc5" class=""><code>-m </code>: Create folder in <em>Root Directory </em>can be found in <code>netc/skel</code></p><figure id="5d873abe-9b5b-429f-a554-4f8e47daf1e2" class="image"><a href="16%2001%202020%20User%20Management/Untitled.png"><img style="width:788px" src="16%2001%202020%20User%20Management/Untitled.png"/></a></figure><hr id="52590ea0-ae73-4a92-a234-60cad0abacbc"/><p id="241236d7-f4de-46dc-b5a4-385f19738691" class="">userdel &gt;&gt; Crontab &quot;Not an error code&quot; , To delete user &amp; folder must use  -r </p><hr id="adc964d1-1d36-48cf-b257-a7b0e4611558"/><p id="3d9e2891-fc2f-463e-9ac2-c4fa81866a50" class=""><mark class="highlight-red">Groups </mark>:<mark class="highlight-yellow"><code> cat etc/groups</code></mark></p><p id="35646692-944e-4fb2-b254-73f175233679" class=""><mark class="highlight-yellow"><code>usermod -G</code></mark><mark class="highlight-yellow"> </mark>{Group} {Username} Assign new Secondary Group </p><p id="d6421a0b-b361-4b6b-adde-3cbe5101cae4" class=""><mark class="highlight-yellow"><code>usermod -g</code></mark><mark class="highlight-yellow"> </mark>{Group} {Username} Assign Primary Group to User  </p><hr id="4808b0f3-9bbf-401d-9d31-38e65fde09ed"/><div id="0d5182d8-67d8-4ac1-be75-216ca05b4e2e" class="column-list"><div id="68dfd963-08f6-4051-9d8d-59e76bc16197" style="width:43.75%" class="column"><p id="529e469a-80d6-4a28-ab24-9b0b3c15bc61" class="">id : print user id </p><ul id="13c6b54f-e009-4553-94c4-13245584f7ce" class="bulleted-list"><li><mark class="highlight-red">-g : </mark>print only the effective group ID</li></ul><ul id="df56d3e7-f0bc-4c55-b903-f5f0c4214e9e" class="bulleted-list"><li><mark class="highlight-red">-G  </mark>: print all group IDs</li></ul><ul id="3f2fd788-649d-42ef-9a80-26d6f6df9737" class="bulleted-list"><li><mark class="highlight-red">-u </mark>: print only the effective user ID</li></ul><ul id="374bdf54-e379-4c01-8a3b-ce73deec8c14" class="bulleted-list"><li><mark class="highlight-red">-r </mark>: print the real ID instead of the effective ID</li></ul><p id="20c45cc6-b05e-4b32-857b-d1a3d47a41c0" class="">
+</p></div><div id="939d89dd-d2ec-4f72-8b7e-374117bafda1" style="width:56.25%" class="column"><figure id="37dd4689-7be5-4746-a4d1-a868ae8340d9" class="image"><a href="16%2001%202020%20User%20Management/Untitled%201.png"><img style="width:344px" src="16%2001%202020%20User%20Management/Untitled%201.png"/></a></figure></div></div><hr id="d52943f2-dc0d-47f1-938a-59e8b362d97d"/><p id="a78a327b-a80e-467c-8487-f6b4fd97c756" class=""><mark class="highlight-red">last </mark>: displays a list of all users logged in (and out)</p><p id="0303eb76-8e08-47f4-80b8-37d70aef4eaa" class=""><code>last</code>  &lt;PathtoFile&gt; pulls name of last user checked in &lt;dir&gt;</p><hr id="11e3cace-1db4-4a30-a694-ec33662444a4"/><p id="309329f2-5ba5-4f3f-926f-0d6105cdb5f8" class=""><mark class="highlight-red">chmod </mark><code>o-r </code>: used to change the access permissions of file system objects (files and directories). It is also used to change special mode flags</p><p id="0ccf5adf-fa8c-433f-8b43-86258aeee086" class=""><mark class="highlight-red">chmod : </mark>Change the mode of each FILE to MODE</p><blockquote id="1921c404-5bab-47db-8429-6379f0dd4780" class="">Each MODE is of the form<code><em> &#x27;[ugoa]*(</em></code><code><em><a href="notion://www.notion.so/%5BrwxXst%5D*%7C%5Bugo%5D">-+=</a></em></code><code><em>)+|[-+=][0-7]+&#x27;</em></code></blockquote><hr id="aa7e05a4-b79a-48ab-9339-f59890e79af0"/><div id="5a1723af-e9e7-4033-8de6-b37658f197f2" class="column-list"><div id="a1e8877e-d0c8-4dd4-be51-94840f55e25a" style="width:75%" class="column"><p id="11cae2ab-5fdc-40dd-bc2f-d2f73abb9bf7" class="">User central Databank is located in <code>etc/passwd </code>runned by <code>cat</code></p></div><div id="2282eac6-ab0e-46b6-acbf-b0629de16259" style="width:24.999999999999993%" class="column"><figure id="8672c354-5e96-4f76-8d5c-8df4b9ca3fb6" class="image"><a href="16%2001%202020%20User%20Management/Untitled%202.png"><img style="width:86px" src="16%2001%202020%20User%20Management/Untitled%202.png"/></a></figure><p id="f9438db3-287f-4e02-837e-ec2ef6b14166" class="">UID   :  GID </p><p id="03f0b766-6399-48e7-8ab4-e34871710d4b" class="">
+</p></div></div><hr id="a30ec91e-772d-4c81-a65b-0503baf7fd03"/><p id="3e5fd6fe-0614-4c56-abd5-03b1f672eb4c" class=""><mark class="highlight-red">etc/shadow</mark> Displays : Passwords of users kept Encrypted in this file </p><hr id="ff6bf06a-ab4a-4181-a2c3-7d5d491ee766"/><p id="1a279793-5270-406c-902e-eaa62f27fdc6" class=""><mark class="highlight-red">crypt </mark>/ <mark class="highlight-red">DES </mark>: In Unix computing, crypt is a utility program used for encryption. Due to the ease of breaking it, it is considered to be obsolete.</p><hr id="a140b805-9e60-4c01-9ba5-17b76dc3dd45"/><p id="0abb7f61-adcb-42f1-ba99-78b066cc452f" class="">eine Zahl zwischen 0 und 2º32−1 , from 0 to 99 reserved for the system , from 100 to 400 can be decaled as &lt;software packets&gt;, most linux Dispos assign real users up from 1000</p><hr id="cd9e84a0-17fc-4ab6-a2ad-f15ddc1a95f5"/><p id="22b36134-3eae-41d4-aea7-49ece441510d" class=""><mark class="highlight-red">login </mark>: Login session with root/user info</p><hr id="811f9ad7-cf16-4031-81db-268b60d9003f"/><p id="5cf860ec-bdf2-40ff-9be5-b1fbea310348" class=""><mark class="highlight-red">chnf </mark>: change Root Information </p><hr id="51db7414-a3b3-4916-bf6e-fde9bb8aa387"/><div id="30afef54-c448-46d9-a167-79af54ff665a" class="column-list"><div id="da997b0c-bcde-411d-b7c6-230ff37064a3" style="width:37.5%" class="column"><h3 id="cd3cb166-84bd-40cd-83c4-f1a906440489" class="">Naming Home direcorties for different users : </h3></div><div id="01974d35-e7ef-4e3d-b67b-882e6d978dff" style="width:62.5%" class="column"><figure id="a0da9f24-610c-434a-91dc-3870951db56e" class="image"><a href="16%2001%202020%20User%20Management/Untitled%203.png"><img style="width:442px" src="16%2001%202020%20User%20Management/Untitled%203.png"/></a></figure></div></div><hr id="6cfeb019-0090-465c-8ea3-23e4cd5910d7"/><p id="bd705744-72cd-42ae-a825-0022298530a1" class=""><mark class="highlight-red">gpasswd : </mark><em>Change group password. May only be used by an administrator.</em></p><p id="798c828f-c92a-473d-a6d2-285efc530574" class="">-a, --add USER add USER to GROUP
+-d, --delete USER remove USER from GROUP
+-h, --help display this help message and exit
+-Q, --root CHROOT_DIR directory to chroot into
+-r, --remove-password remove the GROUP&#x27;s password
+-R, --restrict restrict access to GROUP to its members
+-M, --members USER,... set the list of members of GROUP</p><hr id="c3b1b192-76e5-4982-aa33-28c699f499c2"/><h3 id="7ca3bae6-4223-4e02-9859-c27e1774578f" class=""><mark class="highlight-red">getent                                                          </mark>Ausgabe von <mark class="highlight-red">getent </mark>▼</h3><div id="8afcf6fe-03ae-439a-b695-ba2215b9f9e5" class="column-list"><div id="f3653a0d-f4bc-4a21-bc57-598dbd28ba92" style="width:50%" class="column"><h3 id="c2f71015-2fd2-4075-9728-23daedeff6c0" class="">The getent command displays entries from databases supported by the<mark class="highlight-orange"><em> Name Service Switch libraries</em></mark>, which are configured in : <code>/etc/nsswitch.conf</code> </h3></div><div id="8e6b00ec-5264-4ba6-adb5-d2cf80bbe42a" style="width:50%" class="column"><figure id="677d2cf9-d66f-4733-93df-f88a98eb6b60" class="image"><a href="16%2001%202020%20User%20Management/Untitled%204.png"><img style="width:363px" src="16%2001%202020%20User%20Management/Untitled%204.png"/></a></figure></div></div><hr id="d262337a-d995-4589-8aad-a94551bbd3df"/><h3 id="49d752ad-df33-4fe7-a95c-41dbda5c11e0" class=""><mark class="highlight-red">GECOS </mark></h3><p id="0352ee4b-cde6-47a8-b5a0-4b69eb72042c" class="">The gecos field, or GECOS field is an entry in the /etc/passwd file on Unix, and similar operating systems. It is typically used to record general information about the account or its user(s) such as their real name and phone number.</p><hr id="99c85c81-22a4-4f1a-8e0c-44148e406f8a"/><h3 id="82bce524-9887-4966-a5b7-248ac9b4c500" class=""><mark class="highlight-red">LDAP </mark><em>Light Weight Directory Access Protocol &gt; </em><mark class="highlight-yellow">etc/shadow</mark></h3><hr id="447570e1-cbea-44e2-bb30-fb16067676b7"/><h3 id="2f3842e0-a5a2-4f69-8960-54e407f4a743" class=""><mark class="highlight-red">passwd </mark>: Specify password to users </h3><figure id="1f6aebe2-12cc-4d48-955a-664ae8b79b3d" class="image"><a href="16%2001%202020%20User%20Management/Untitled%205.png"><img style="width:794px" src="16%2001%202020%20User%20Management/Untitled%205.png"/></a></figure><hr id="f764c7e0-0989-4afd-b743-dfd1f0503301"/><h3 id="999c4411-e94d-4308-8040-feeda69c028a" class="">Change etc/shadow with <code>vipw -s</code></h3><hr id="2d08f944-0620-4f1f-9c59-5ba17ad0c827"/><div id="6a31b63c-2f64-4b60-97e4-242253bc7feb" class="collection-content"><h4 class="collection-title">Compare</h4><table class="collection-content"><thead><tr><th>USER</th><th>Groups</th></tr></thead><tbody><tr id="ba8a821c-0769-40c8-b982-aef7be7b5449"><td class="cell-title"><a href="16%2001%202020%20User%20Management/Compare/useradd.html">useradd</a></td><td class="cell-U&amp;F}">groupadd</td></tr><tr id="a0626990-d8d8-4717-bb35-f1b3b604fc98"><td class="cell-title"><a href="16%2001%202020%20User%20Management/Compare/usermod.html">usermod</a></td><td class="cell-U&amp;F}">groupmod</td></tr><tr id="9ad02eb7-1ebe-40f0-a220-77be65a9fd68"><td class="cell-title"><a href="16%2001%202020%20User%20Management/Compare/userdel.html">userdel</a></td><td class="cell-U&amp;F}">groupdel</td></tr></tbody></table></div><hr id="17da6660-b03a-4894-8f0d-c3d3404ce165"/><p id="3b389cb4-5364-4a06-a5de-cfb0a351682d" class=""><strong>Change Group Name : </strong></p><figure id="4529b05a-dfeb-4782-a10f-bcf067535b60" class="image"><a href="16%2001%202020%20User%20Management/Untitled%206.png"><img style="width:485px" src="16%2001%202020%20User%20Management/Untitled%206.png"/></a></figure><hr id="862a6681-3746-4f5a-9b05-052fcf340567"/><h3 id="4cd1d8d8-ac28-4f56-99c4-36008d4d14ec" class="">Deleteing <a href="linux ">Soft/Hard </a>Links : </h3><pre id="ad3caad0-e676-4e3e-add0-55e590f5d906" class="code"><code><mark class="highlight-red">unlink </mark><a href="linux ">NameofLINKS</a></code></pre><p id="ee30b7ac-288f-4d2e-ae3b-d67438fe653a" class="">
+</p><p id="9995afb3-8ebb-4e16-93ce-65d29ab56b0f" class="">To find all broken symbolic links under a given directory, run the following command:</p><pre id="8f8d61f8-d250-4bc1-afb8-8cf6fdc5aaba" class="code"><code>find /path/to/directory -<mark class="highlight-red">xtype l</mark></code></pre><p id="3e336994-faf5-481d-9993-69d35c597338" class="">
+</p><p id="a80cb9f0-0d39-47a5-8453-37a75a597c2d" class="">If you want to <mark class="highlight-red">exclude </mark>the symlinks that are contained in the <mark class="highlight-red">subdirectories </mark>pass the <code>-maxdepth 1</code> option to <a href="https://linuxize.com/post/how-to-find-files-in-linux-using-the-command-line/"><code>find</code></a>:</p><pre id="07535b93-0927-462c-a8fc-2dd9d48976d8" class="code"><code>find /path/to/directory -<mark class="highlight-red">maxdepth </mark>1 -<mark class="highlight-red">xtype l</mark></code></pre><hr id="ea989061-d42f-4417-ac3c-eabf2e6e7837"/><h3 id="2767cda5-cfd0-4676-8dd5-a3618fe0eb3d" class="">Lisiting Links : <mark class="highlight-red">symbolics </mark>and <mark class="highlight-red">hard </mark></h3><p id="a30fac07-4846-4256-9591-813fe706d1e4" class="">
+</p><figure id="412f6e08-9512-4a01-b7f2-d6ea61447598" class="image"><a href="16%2001%202020%20User%20Management/Untitled%207.png"><img style="width:524px" src="16%2001%202020%20User%20Management/Untitled%207.png"/></a></figure><hr id="ef830ffe-e515-4f8d-a306-2fcc3af8c118"/><p id="99b3a0c9-4b7c-4c01-ba79-198b9b290132" class="">vipw, vigr - edit the password, group, shadow-password or shadow-group file</p><hr id="7ebb2efc-576b-45b9-884b-59d6dbf1d95c"/><blockquote id="e20c1cea-e3f2-4dfa-895b-376e107975a8" class=""><code>echo $0</code> If the output of echo $0 command is -bash it means that bash was invoked as a login shell. If the output is only bash, then you are in a non-login shell &gt;&gt; <mark class="highlight-red">Result is </mark>: <code>-bash</code></blockquote><hr id="7fe81e45-77eb-40e5-b73d-a77576737a10"/><p id="c1dd0cde-c2de-43fe-bb30-6e4d999e33c6" class="">
+</p></div></article></body></html>
